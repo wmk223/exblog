@@ -1,0 +1,88 @@
+<%- include ../include/header%>
+<div class="col-lg-8" style="margin-left: 150px">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title">Blog-用户登录</h4>
+        </div>
+        <form class="form-horizontal" role="form" action="/users/add" method="post" id="loginsubmit">
+            <div class="modal-body">
+                <%
+                if(error){
+                %>
+                <div class="form-group">
+                    <div class="col-sm-12 alert alert-danger" role="alert">
+                        <%=error%>
+                    </div>
+                </div>
+                <%
+                }
+                %>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">用户名</label>
+                    <div class="col-sm-6">
+                        <input type="text" name="username" class="form-control" id="loginUsername1" placeholder="请输入您的用户名">
+                    </div>
+                    <p></p>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-2 control-label">密码</label>
+                    <div class="col-sm-6">
+                        <input type="password" name="password" class="form-control" id="loginPassword1" placeholder="请输入您的密码">
+                    </div>
+                    <p></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <input type="submit" class="btn btn-success col-sm-3" value="注册">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<%- include ../include/footer%>
+<script>
+    $(function() {
+        $('#loginsubmit').submit(function(){
+            var username = $('#loginUsername1').val();
+            var psd = $('#loginPassword1').val();
+            if(username&&psd){
+                return true;
+            }
+            else{
+                if (!username) {
+                    $('P').eq(0).html("请输入名称");
+                    $('P').eq(0).attr("class", "p alert-danger");
+                }
+                if (!psd) {
+                    $('P').eq(1).html("请输入密码");
+                    $('P').eq(1).attr("class", "p alert-danger");
+                }
+                return false;
+            }
+
+        });
+        $('#loginUsername1').blur(function() {
+            var username = $('#loginUsername1').val();
+            if(username){
+                $('P').eq(0).html("用户名输入正确");
+                $('P').eq(0).attr("class", "p alert-success");
+            }else{
+                $('P').eq(0).html("用户名不为空");
+                $('P').eq(0).attr("class", "p alert-danger");
+            }
+        });
+        $('#loginPassword1').blur(function() {
+            var username = $('#loginPassword1').val();
+            if(username){
+                $('P').eq(1).html("密码输入正确");
+                $('P').eq(1).attr("class", "p alert-success");
+            }else{
+                $('P').eq(1).html("密码不为空");
+                $('P').eq(1).attr("class", "p alert-danger");
+            }
+        })
+    })
+</script>

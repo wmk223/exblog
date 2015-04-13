@@ -1,0 +1,133 @@
+<%- include ../include/header%>
+    <div class="col-lg-8" style="margin-left: 150px">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Blog-用户注册</h4>
+      </div>
+      <form class="form-horizontal" role="form" action="/users/reg" method="post" id="regsubmit">
+        <div class="modal-body">
+          <%
+          if(error){
+          %>
+          <div class="form-group">
+            <div class="col-sm-12 alert alert-danger" role="alert">
+            <%=error%>
+            </div>
+          </div>
+          <%
+          }
+          %>
+          <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">用户名</label>
+            <div class="col-sm-6">
+              <input type="text" name="username" class="form-control" id="regUsername" placeholder="请输入您的用户名">
+            </div>
+            <p></p>
+          </div>
+          <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">邮箱</label>
+            <div class="col-sm-6">
+              <input type="Email" name="email" class="form-control" id="regEmail" placeholder="请输入您的邮箱">
+            </div>
+            <p></p>
+          </div>
+          <div class="form-group">
+            <label for="inputPassword3" class="col-sm-2 control-label">密码</label>
+            <div class="col-sm-6">
+              <input type="password" name="password" class="form-control" id="regPassword" placeholder="请输入您的密码">
+            </div>
+            <p></p>
+          </div>
+          <div class="form-group">
+            <label for="inputPassword3" class="col-sm-2 control-label">确认密码</label>
+            <div class="col-sm-6">
+              <input type="password" name="password_repeat" class="form-control" id="regPassword2" placeholder="请输入您的密码">
+            </div>
+            <p></p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <input type="submit" class="btn btn-success col-sm-3" value="注册">
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    </div>
+<%- include ../include/footer%>
+<script>
+  $(function() {
+    $('#regsubmit').submit(function(){
+      var user = $('#regUsername').val();
+      var  email =  $('#regEmail').val();
+      var psd = $('#regPassword').val();
+      var re_psd =$('#regPassword2').val();
+      if(user&&psd&&email&&re_psd){
+        return true;
+      }
+      else{
+        if (!user) {
+          $('P').eq(0).html("请输入名称");
+          $('P').eq(0).attr("class", "p alert-danger");
+        }
+        if (!email) {
+          $('P').eq(1).html("请输入邮箱");
+          $('P').eq(1).attr("class", "p alert-danger");
+        }
+        if (!psd) {
+          $('P').eq(2).html("请输入密码");
+          $('P').eq(2).attr("class", "p alert-danger");
+        }
+        if (!re_psd) {
+          $('P').eq(3).html("请输入确认密码");
+          $('P').eq(3).attr("class", "p alert-danger");
+        }
+        return false;
+      }
+
+    });
+    $('#regUsername').blur(function() {
+      var username = $('#regUsername').val();
+      if(username){
+        $('P').eq(0).html("用户名输入正确");
+        $('P').eq(0).attr("class", "p alert-success");
+      }else{
+        $('P').eq(0).html("用户名不为空");
+        $('P').eq(0).attr("class", "p alert-danger");
+      }
+    });
+    $('#regEmail').blur(function() {
+      var username = $('#regEmail').val();
+      if(username){
+        $('P').eq(1).html("邮箱输入正确");
+        $('P').eq(1).attr("class", "p alert-success");
+      }else{
+        $('P').eq(1).html("邮箱不为空");
+        $('P').eq(1).attr("class", "p alert-danger");
+      }
+    });
+    $('#regPassword').blur(function() {
+      var username = $('#regPassword').val();
+      if(username){
+        $('P').eq(2).html("密码输入正确");
+        $('P').eq(2).attr("class", "p alert-success");
+      }else{
+        $('P').eq(2).html("密码不为空");
+        $('P').eq(2).attr("class", "p alert-danger");
+      }
+    });
+    $('#regPassword2').blur(function() {
+      var username = $('#regPassword2').val();
+      if(username!=$('#regPassword').val()){
+        $('P').eq(3).html("两次密码不一样");
+        $('P').eq(3).attr("class", "p alert-danger");
+      }else{
+        $('P').eq(3).html("密码输入正确");
+        $('P').eq(3).attr("class", "p alert-success");
+      }
+    });
+
+  })
+</script>
